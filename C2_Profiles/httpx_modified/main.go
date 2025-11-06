@@ -1,7 +1,7 @@
 package main
 
 import (
-	httpfunctions "MyContainer/httpx/c2functions"
+	httpfunctions "MyContainer/httpx_modified/c2functions"
 	"github.com/MythicMeta/MythicContainer"
 )
 

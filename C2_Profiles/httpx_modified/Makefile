@@ -13,11 +13,11 @@ WEBHOOK_DEFAULT_STARTUP_CHANNEL?=
 build:
 	CGO_ENABLED=0 go build -o ${BINARY_NAME} .
 	cp ${BINARY_NAME} /
-	cd httpx/c2_code && make build
+	cd httpx_modified/c2_code && make build
 
 run:
 	cp /${BINARY_NAME} .
-	cd httpx/c2_code && make run
+	cd httpx_modified/c2_code && make run
 	./${BINARY_NAME}
 
 run_custom:

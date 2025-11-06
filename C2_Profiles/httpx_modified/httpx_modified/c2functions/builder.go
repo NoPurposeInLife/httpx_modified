@@ -1,7 +1,7 @@
 package c2functions
 
 import (
-	"MyContainer/httpx/mythicGraphql"
+	"MyContainer/httpx_modified/mythicGraphql"
 	"bytes"
 	"context"
 	"encoding/json"
@@ -67,7 +67,7 @@ type AgentVariations struct {
 
 func getC2JsonConfig() (*config, error) {
 	currentConfig := config{}
-	if configBytes, err := os.ReadFile(filepath.Join(".", "httpx", "c2_code", "config.json")); err != nil {
+	if configBytes, err := os.ReadFile(filepath.Join(".", "httpx_modified", "c2_code", "config.json")); err != nil {
 		return nil, err
 	} else if err = json.Unmarshal(configBytes, &currentConfig); err != nil {
 		logging.LogError(err, "Failed to unmarshal config bytes")
@@ -81,11 +81,11 @@ func writeC2JsonConfig(cfg *config) error {
 	if err != nil {
 		return err
 	}
-	return os.WriteFile(filepath.Join(".", "httpx", "c2_code", "config.json"), jsonBytes, 644)
+	return os.WriteFile(filepath.Join(".", "httpx_modified", "c2_code", "config.json"), jsonBytes, 644)
 }
 func getAgentJsonConfig() (map[string]AgentVariations, error) {
 	currentConfig := map[string]AgentVariations{}
-	if configBytes, err := os.ReadFile(filepath.Join(".", "httpx", "c2_code", "agent_configs.json")); err != nil {
+	if configBytes, err := os.ReadFile(filepath.Join(".", "httpx_modified", "c2_code", "agent_configs.json")); err != nil {
 		return nil, err
 	} else if err = json.Unmarshal(configBytes, &currentConfig); err != nil {
 		logging.LogError(err, "Failed to unmarshal config bytes")
@@ -99,19 +99,19 @@ func writeAgentJsonConfig(cfg map[string]AgentVariations) error {
 	if err != nil {
 		return err
 	}
-	return os.WriteFile(filepath.Join(".", "httpx", "c2_code", "agent_configs.json"), jsonBytes, 644)
+	return os.WriteFile(filepath.Join(".", "httpx_modified", "c2_code", "agent_configs.json"), jsonBytes, 644)
 }
 
 var validLocations = []string{"cookie", "query", "header", "body", ""}
 var validActions = []string{"base64", "base64url", "netbios", "netbiosu", "xor", "prepend", "append", "base64decode", "base64decodeurl"}
 var version = "0.0.4"
 var httpxc2definition = c2structs.C2Profile{
-	Name:             "httpx",
+	Name:             "httpx_modified",
 	Author:           "@Dillon",
 	Description:      fmt.Sprintf("Crowdsourced and community driven HTTP profile with lots of variation options. Version: %s", version),
 	IsP2p:            false,
 	IsServerRouted:   true,
-	ServerBinaryPath: filepath.Join(".", "httpx", "c2_code", "mythic_httpx_server"),
+	ServerBinaryPath: filepath.Join(".", "httpx_modified", "c2_code", "mythic_httpx_server"),
 	ConfigCheckFunction: func(message c2structs.C2ConfigCheckMessage) c2structs.C2ConfigCheckMessageResponse {
 		response := c2structs.C2ConfigCheckMessageResponse{
 			Success: true,
@@ -757,6 +757,6 @@ func validateAndUpdateConfig(agentConfigFileID string) error {
 	return nil
 }
 func Initialize() {
-	c2structs.AllC2Data.Get("httpx").AddC2Definition(httpxc2definition)
-	c2structs.AllC2Data.Get("httpx").AddParameters(httpxc2parameters)
+	c2structs.AllC2Data.Get("httpx_modified").AddC2Definition(httpxc2definition)
+	c2structs.AllC2Data.Get("httpx_modified").AddParameters(httpxc2parameters)
 }
