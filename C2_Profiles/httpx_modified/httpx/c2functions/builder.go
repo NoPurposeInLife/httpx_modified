@@ -106,8 +106,8 @@ var validLocations = []string{"cookie", "query", "header", "body", ""}
 var validActions = []string{"base64", "base64url", "netbios", "netbiosu", "xor", "prepend", "append"}
 var version = "0.0.4"
 var httpxc2definition = c2structs.C2Profile{
-	Name:             "httpx",
-	Author:           "@its_a_feature_",
+	Name:             "httpx_modified",
+	Author:           "@Dillon",
 	Description:      fmt.Sprintf("Crowdsourced and community driven HTTP profile with lots of variation options. Version: %s", version),
 	IsP2p:            false,
 	IsServerRouted:   true,
