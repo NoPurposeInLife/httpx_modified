@@ -103,7 +103,7 @@ func writeAgentJsonConfig(cfg map[string]AgentVariations) error {
 }
 
 var validLocations = []string{"cookie", "query", "header", "body", ""}
-var validActions = []string{"base64", "base64url", "netbios", "netbiosu", "xor", "prepend", "append"}
+var validActions = []string{"base64", "base64url", "netbios", "netbiosu", "xor", "prepend", "append", "base64decode", "base64decodeurl"}
 var version = "0.0.4"
 var httpxc2definition = c2structs.C2Profile{
 	Name:             "httpx_modified",
