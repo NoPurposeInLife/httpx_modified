@@ -115,6 +115,16 @@ func transformMessageFromServer(message []byte, variation AgentVariationConfig) 
 	var err error
 	for i := 0; i < len(variation.Server.Transforms); i++ {
 		switch strings.ToLower(variation.Server.Transforms[i].Action) {
+		case "base64decode":
+			result, err = transformBase64Reverse(result, variation.Server.Transforms[i].Value)
+			if err != nil {
+				return nil, err
+			}
+		case "base64decodeurl":
+			result, err = transformBase64URLReverse(result, variation.Server.Transforms[i].Value)
+			if err != nil {
+				return nil, err
+			}
 		case "base64":
 			result, err = transformBase64(result, variation.Server.Transforms[i].Value)
 			if err != nil {
@@ -161,6 +171,16 @@ func transformMessageFromClient(message []byte, variation AgentVariationConfig) 
 	var err error
 	for i := len(variation.Client.Transforms) - 1; i >= 0; i-- {
 		switch strings.ToLower(variation.Client.Transforms[i].Action) {
+		case "base64decode":
+			result, err = transformBase64(result, variation.Server.Transforms[i].Value)
+			if err != nil {
+				return nil, err
+			}
+		case "base64decodeurl":
+			result, err = transformBase64URL(result, variation.Server.Transforms[i].Value)
+			if err != nil {
+				return nil, err
+			}
 		case "base64":
 			result, err = transformBase64Reverse(result, variation.Client.Transforms[i].Value)
 			if err != nil {
